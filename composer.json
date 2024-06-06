@@ -1,0 +1,81 @@
+{
+  "name": "apricity/handler",
+  "description": "A PHP class for parsing and executing various types of handlers, including strings in the format 'Class@method', callable functions, and arrays with class and method names.",
+  "readme": "README.md",
+  "license": "BSD-3-Clause",
+  "type": "library",
+  "scripts": {
+    "package:version": "echo v2.0.3",
+    "package:validate": "composer validate",
+    "package:regenerate": "composer dump-autoload",
+    "install:dev": [
+      "composer install"
+    ],
+    "install:prod": [
+      "composer install --optimize-autoloader --no-dev"
+    ],
+    "test": "vendor/bin/phpunit --testdox --colors=always tests"
+  },
+  "scripts-descriptions": {
+    "package:version": "Show the current package version.",
+    "package:validate": "Check the validity of the composer.json file before publishing.",
+    "package:regenerate": "Generate new PSR-4 autoload paths.",
+    "test": "Run tests."
+  },
+  "require": {
+    "php": ">=8.2"
+  },
+  "config": {
+    "optimize-autoloader": false,
+    "sort-packages": true
+  },
+  "prefer-stable": true,
+  "require-dev": {
+    "phpunit/phpunit": "^11.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Apricity\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Apricity\\tests\\": "tests"
+    },
+    "files": [
+      "tests/mocks/TestFunction.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Dárius Bokor",
+      "email": "info@weroro.sk",
+      "homepage": "https://www.weroro.sk",
+      "role": "lead"
+    }
+  ],
+  "archive": {
+    "exclude": [
+      "vendor",
+      "tests",
+      ".gitignore",
+      "composer.lock",
+      ".idea",
+      ".github",
+      ".DS_Store",
+      "Thumbs.db"
+    ]
+  },
+  "keywords": [
+    "handler",
+    "parser",
+    "executor",
+    "callable",
+    "controller",
+    "method",
+    "class",
+    "PHP",
+    "dependency",
+    "management"
+  ]
+}
