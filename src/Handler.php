@@ -1,7 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Apricity;
 
+/**
+ * A PHP class for parsing and executing various types of handlers, including strings in the format "Class@method",
+ * callable functions, and arrays with class and method names.
+ *
+ * @see https://github.com/weroro-sk/apricity-handler/blob/main/README.md Documentation
+ */
 class Handler
 {
     /**
@@ -12,6 +20,7 @@ class Handler
      *
      * @param string|callable|array $handler The handler to trigger.
      * @param array $vars (optional) Variables to pass to the handler.
+     *
      * @return mixed The result of the handler execution.
      * @throws HandlerException If the handler is not valid or cannot be executed.
      *
@@ -64,6 +73,7 @@ class Handler
      *
      *
      * @param string|callable|array $handler The handler to parse.
+     *
      * @return array The parsed handler as an array.
      * @throws HandlerException If the handler is not valid or cannot be found.
      *
@@ -108,7 +118,7 @@ class Handler
 
         // If the handler is an array with two elements (class and method), validate it.
         if (is_array($temp_handler) && count($temp_handler) === 2) {
-            list($class, $method) = $temp_handler;
+            [$class, $method] = $temp_handler;
 
             // Check if the class exists.
             if (!class_exists($class)) {
