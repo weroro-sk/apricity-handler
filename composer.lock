@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a43ae5a1590acbd2db0eefaf9dd2e942",
-    "packages": [],
+    "content-hash": "ef6b32e442629bbab9c9e6c6b1097f69",
+    "packages": [
+        {
+            "name": "apricity/micro-cache",
+            "version": "v1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/weroro-sk/apricity-micro-cache.git",
+                "reference": "d6a54e740179719f57b3e1106c2daaa2fa5ac044"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/weroro-sk/apricity-micro-cache/zipball/d6a54e740179719f57b3e1106c2daaa2fa5ac044",
+                "reference": "d6a54e740179719f57b3e1106c2daaa2fa5ac044",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Apricity\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dárius Bokor",
+                    "homepage": "https://www.weroro.sk",
+                    "role": "lead"
+                }
+            ],
+            "description": "Simple in-memory caching mechanism for PHP applications.",
+            "keywords": [
+                "cache",
+                "caching",
+                "in-memory",
+                "memory",
+                "performance",
+                "php",
+                "weroro"
+            ],
+            "support": {
+                "issues": "https://github.com/weroro-sk/apricity-micro-cache/issues",
+                "source": "https://github.com/weroro-sk/apricity-micro-cache"
+            },
+            "time": "2024-06-07T23:27:25+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "myclabs/deep-copy",

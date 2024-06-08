@@ -44,9 +44,6 @@ class Handler
      */
     public static function trigger(string|callable|array $handler, array $vars = []): mixed
     {
-        // Parse the handler to ensure it's in the correct format.
-        $handler = self::parse($handler);
-
         // If the handler is a callable (single element), call it directly with the variables.
         if (count($handler) === 1) {
             if (false === ($result = call_user_func_array($handler[0], $vars))) {
@@ -63,6 +60,44 @@ class Handler
         }
 
         return $result;
+    }
+
+    /**
+     * Triggers the specified handler with the given variables.
+     *
+     * The handler can be a string, callable, or an array. It will be parsed
+     * and executed with the provided variables.
+     *
+     * @param string|callable|array $handler The handler to trigger.
+     * @param array $vars (optional) Variables to pass to the handler.
+     *
+     * @return mixed The result of the handler execution.
+     * @throws HandlerException If the handler is not valid or cannot be executed.
+     *
+     * ```
+     * // Example 1: Using "Class@method" string format
+     * $result1 = Handler::trigger("ExampleClass@exampleMethod", ["value1", "value2"]);
+     * echo $result1; // Outputs: Example method executed with value1 and value2.
+     *
+     * // Example 2: Using callable array [Class, method]
+     * $result2 = Handler::trigger([ExampleClass::class, "exampleMethod"], ["value1", "value2"]);
+     * echo $result2; // Outputs: Example method executed with value1 and value2.
+     *
+     * // Example 3: Using callable "function"
+     * $result3 = Handler::trigger("exampleFunction", ["value1", "value2"]);
+     * echo $result3; // Outputs: Example function executed with value1 and value2.
+     *
+     * // Example 4: Using callable array ["function"]
+     * $result4 = Handler::trigger(["exampleFunction"], ["value1", "value2"]);
+     * echo $result4; // Outputs: Example function executed with value1 and value2.
+     * ```
+     */
+    public static function cachedTrigger(string|callable|array $handler, array $vars = []): mixed
+    {
+        // Parse the handler to ensure it's in the correct format.
+        $handler = self::parse($handler);
+
+        return self::trigger($handler, $vars);
     }
 
     /**
@@ -102,6 +137,10 @@ class Handler
             throw new HandlerException('Invalid handler.');
         }
 
+        if (null !== ($value = HandlerCache::get($handler))) {
+            return $value;
+        }
+
         // If the handler is a string in the format 'Class@method', split it into an array.
         if (is_string($temp_handler) && strlen($temp_handler) > 2 && substr_count($temp_handler, '@') === 1) {
             $temp_handler = explode('@', $temp_handler, 2);
@@ -112,6 +151,7 @@ class Handler
             || (is_array($temp_handler) && count($temp_handler) === 1 && function_exists($temp_handler = $temp_handler[0]))
         ) {
 
+            HandlerCache::set($handler, [$temp_handler]);
             // return the handler as a single-element array.
             return [$temp_handler];
         }
@@ -129,6 +169,7 @@ class Handler
                 throw new HandlerException('Handler method "' . $method . '" in class "' . $class . '" not found.');
             }
 
+            HandlerCache::set($handler, $temp_handler);
             return $temp_handler;
         }
 
