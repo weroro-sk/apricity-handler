@@ -1,9 +1,5 @@
 # Handler
 
-[![Latest Stable Version](http://poser.pugx.org/apricity/handler/v)](https://packagist.org/packages/apricity/handler)
-[![PHP Version Require](http://poser.pugx.org/apricity/handler/require/php)](https://packagist.org/packages/apricity/handler)
-[![License](http://poser.pugx.org/apricity/handler/license)](LICENSE)
-
 The `Handler` class is responsible for triggering and parsing handlers. Handlers can be strings in the format
 `Class@method`, `callable` functions, `array`s containing a class and method name or `array`s containing `callable`
 function. The class ensures the handler is valid and can be executed with the provided variables.
