@@ -8,6 +8,9 @@ class ExampleClass
     {
         return "Example method executed with $param1 and $param2.";
     }
+
+    public static function exampleMethodNoVars(): string
+    {
+        return "Example method executed.";
+    }
 }
-
-

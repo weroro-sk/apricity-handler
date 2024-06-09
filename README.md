@@ -1,8 +1,12 @@
 # Handler
 
+[![Latest Stable Version](http://poser.pugx.org/apricity/handler/v)](https://packagist.org/packages/apricity/handler)
+[![PHP Version Require](http://poser.pugx.org/apricity/handler/require/php)](https://packagist.org/packages/apricity/handler)
+[![License](http://poser.pugx.org/apricity/handler/license)](LICENSE)
+
 The `Handler` class is responsible for triggering and parsing handlers. Handlers can be strings in the format
-`Class@method`, `callable` functions, or `array`s containing a class and method name. The class ensures the handler is
-valid and can be executed with the provided variables.
+`Class@method`, `callable` functions, `array`s containing a class and method name or `array`s containing `callable`
+function. The class ensures the handler is valid and can be executed with the provided variables.
 
 ## Installation
 
@@ -12,36 +16,113 @@ composer require apricity/handler
 
 ## Table of contents
 
-1. Methods (API)
-    - [Handler::trigger](#handlertrigger)
-        - [example](#example)
-    - [Handler::parse](#handlerparse)
-        - [example](#example-1)
+1. Usage
+    - API
+        - [Handler::simpleTrigger](#handlersimpletrigger)
+        - [Handler::trigger](#handlertrigger)
+        - [Handler::parse](#handlerparse)
 2. [Tests](#run-tests)
-3. [Changelog](CHANGELOG.md)
-4. [License](#license)
+3. [Contributing](#contributing)
+4. [Changelog](CHANGELOG.md)
+5. [License](#license)
+
+---
+
+### Handler::simpleTrigger
+
+Executes a given handler with provided variables.
+
+This method can handle multiple types of handlers: an array with a class and method, a callable, or a string. It
+attempts to execute the handler with the provided variables and returns the result. If the handler is invalid or
+execution fails, it throws a HandlerException.
+
+```php
+public static function simpleTrigger(array|callable|string $handler, array $vars = []): mixed
+```
+
+**Parameters:**
+
+- `array|callable|string $handler`: The handler to be executed.
+    - **It can be**:
+        - A callable/closure function.
+        - A string representing a function name.
+        - An array containing a single string element representing a function name.
+        - An array containing a class and method.
+        - An array containing a class name and method as strings.
+- `array $vars`: [optional] The variables to pass to the handler. Default is an empty array.
+
+**Returns:** `mixed` - The result of the handler execution.
+
+**Throws:** `HandlerException` - If the handler is invalid or execution fails.
+
+#### Example
+
+```php
+namespace Apricity;
+
+use HandlerException;
+
+class ExampleClass
+{
+    public function exampleMethod($param1, $param2)
+    {
+        return "Example method executed with $param1 and $param2.";
+    }
+}
+
+// Define a standalone function to use as a handler
+function exampleFunction($param1, $param2)
+{
+    return "Example function executed with $param1 and $param2.";
+}
+
+try {
+    $result = Handler::simpleTrigger(function($a, $b) { return $a + $b; }, [5, 3]);
+    echo $result; // Outputs: 8
+
+    $result = Handler::simpleTrigger('strtolower', ['HELLO']);
+    echo $result; // Outputs: hello
+
+    // Using callable array [Class, method]
+    $result = Handler::simpleTrigger([ExampleClass::class, 'exampleMethod'], ['value1', 'value2']);
+    echo $result; // Outputs: Example method executed with value1 and value2.
+
+    // Using callable array ["function"]
+    $result = Handler::simpleTrigger(['exampleFunction'], ['value1', 'value2']);
+    echo $result; // Outputs: Example function executed with value1 and value2.
+
+} catch (HandlerException $e) {
+    echo 'Error: ' . $e->getMessage();
+}
+```
 
 ---
 
 ### Handler::trigger
 
-Triggers the specified handler with the given variables.
+Triggers the execution of a given handler with provided variables.
 
-The handler can be a string, callable, or an
-array. It will be parsed and executed with the provided variables.
+This method first parses the handler to ensure it's in the correct format, and then executes it using the simpleTrigger
+method. The handler can be a string, callable, or an array. It returns the result of the handler execution.
 
 ```php
-public static function trigger(string|callable|array $handler, array $vars = []): mixed
+public static function trigger(array|callable|string $handler, array $vars = []): mixed
 ```
 
 **Parameters:**
 
-- `string|callable|array $handler`: The handler to trigger.
-- `array $vars`: [optional] Variables to pass to the handler.
+- `array|callable|string $handler`: The handler to be executed.
+    - **It can be**:
+        - A string in the format "Class@method".
+        - A string representing a function name.
+        - An array containing a single string element representing a function name.
+        - An array containing a class and method.
+        - An array containing a class name and method as strings.
+- `array $vars`: [optional] The variables to pass to the handler. Default is an empty array.
 
 **Returns:** `mixed` - The result of the handler execution.
 
-**Throws:** `HandlerException` - If the handler is not valid or cannot be executed.
+**Throws:** `HandlerException` - If the handler is invalid or execution fails.
 
 #### Example
 
@@ -90,23 +171,28 @@ try {
 
 ### Handler::parse
 
-Parses the handler to ensure it's in a valid format and can be executed.
+Parses a given handler into a standardized array format.
 
-The handler can be a string in the
-format `Class@method`, a `callable`, or an `array` with two elements where the first is a class name and the second is a
-method name.
+This method accepts a handler in various formats and returns it as an array. It handles strings, callables, and arrays,
+caching the result for future use. If the handler is invalid, it throws a HandlerException.
 
 ```php
-public static function parse(string|callable|array $handler): array
+public static function parse(array|callable|string $handler): array
 ```
 
 **Parameters:**
 
-- `string|callable|array $handler`: The handler to parse.
+- `array|callable|string $handler`: The handler to be executed.
+    - **It can be**:
+        - A string in the format "Class@method".
+        - A string representing a function name.
+        - An array containing a single string element representing a function name.
+        - An array containing a class and method.
+        - An array containing a class name and method as strings.
 
 **Returns**: `array` - The parsed handler as an array.
 
-**Throws**: `HandlerException` - If the handler is not valid or cannot be found.
+**Throws**: `HandlerException` - If the handler is invalid or not found.
 
 #### Example
 
@@ -157,6 +243,13 @@ try {
 ```shell
 composer test
 ```
+
+---
+
+## Contributing
+
+We welcome contributions from the community! For guidelines on how to contribute, please refer to
+the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ---
 

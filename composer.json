@@ -58,14 +58,15 @@
   ],
   "archive": {
     "exclude": [
-      "vendor",
-      "tests",
-      ".gitignore",
+      "tests/",
+      "vendor/",
+      ".idea/",
+      ".git/",
       "composer.lock",
-      ".idea",
-      ".github",
-      ".DS_Store",
-      "Thumbs.db"
+      "CONTRIBUTING.md",
+      "CHANGELOG.md",
+      ".gitignore",
+      ".gitattributes"
     ]
   },
   "keywords": [

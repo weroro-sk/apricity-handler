@@ -24,4 +24,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Moved the "Code Details" section from the README file to a [separate file](src/Handler.php.md).
-- 

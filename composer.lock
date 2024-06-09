@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "apricity/micro-cache",
-            "version": "v1.10.0",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/weroro-sk/apricity-micro-cache.git",
-                "reference": "d6a54e740179719f57b3e1106c2daaa2fa5ac044"
+                "reference": "c022753a895e82b45e05770b3f29cba7986cf5f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/weroro-sk/apricity-micro-cache/zipball/d6a54e740179719f57b3e1106c2daaa2fa5ac044",
-                "reference": "d6a54e740179719f57b3e1106c2daaa2fa5ac044",
+                "url": "https://api.github.com/repos/weroro-sk/apricity-micro-cache/zipball/c022753a895e82b45e05770b3f29cba7986cf5f0",
+                "reference": "c022753a895e82b45e05770b3f29cba7986cf5f0",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "issues": "https://github.com/weroro-sk/apricity-micro-cache/issues",
                 "source": "https://github.com/weroro-sk/apricity-micro-cache"
             },
-            "time": "2024-06-07T23:27:25+00:00"
+            "time": "2024-06-08T14:18:48+00:00"
         }
     ],
     "packages-dev": [
@@ -621,16 +621,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.1.3",
+            "version": "11.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d475be032238173ca3b0a516f5cc291d174708ae"
+                "reference": "705eba0190afe04bc057f565ad843267717cf109"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d475be032238173ca3b0a516f5cc291d174708ae",
-                "reference": "d475be032238173ca3b0a516f5cc291d174708ae",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/705eba0190afe04bc057f565ad843267717cf109",
+                "reference": "705eba0190afe04bc057f565ad843267717cf109",
                 "shasum": ""
             },
             "require": {
@@ -669,7 +669,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "11.1-dev"
+                    "dev-main": "11.2-dev"
                 }
             },
             "autoload": {
@@ -701,7 +701,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.1.3"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.2.0"
             },
             "funding": [
                 {
@@ -717,7 +717,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-24T06:34:25+00:00"
+            "time": "2024-06-07T04:48:50+00:00"
         },
         {
             "name": "sebastian/cli-parser",

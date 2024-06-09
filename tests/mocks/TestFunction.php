@@ -7,4 +7,9 @@ if (!function_exists('exampleFunction')) {
     {
         return "Example function executed with $param1 and $param2.";
     }
+
+    function exampleFunctionNoVars(): string
+    {
+        return "Example function executed.";
+    }
 }
