@@ -79,6 +79,7 @@
     "class",
     "PHP",
     "dependency",
-    "management"
+    "management",
+    "weroro"
   ]
 }
