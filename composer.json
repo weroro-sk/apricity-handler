@@ -9,7 +9,7 @@
   "license": "BSD-3-Clause",
   "type": "library",
   "scripts": {
-    "package:version": "echo v2.1.0",
+    "package:version": "echo v2.1.1",
     "package:validate": "composer validate",
     "package:regenerate": "composer dump-autoload",
     "install:dev": "composer install",
